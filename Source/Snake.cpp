@@ -280,8 +280,16 @@ void Snake::mutate(){
 }
 
 void Snake::calculateFitness(){
-	fitness = life + pow(2, score) + pow(score, 2.1) * 500 - pow(score, 1.2) * pow(0.25 * life, 1.3);
+	//fitness = life + pow(2, score) + pow(score, 2.1) * 500 - pow(score, 1.2) * pow(0.25 * life, 1.3);
 	//fitness = life + pow(2, score);
+	if (score < 10) {
+		fitness = floor(life * life) * pow(2, score);
+	}
+	else {
+		fitness = floor(life * life);
+		fitness *= pow(2, 10);
+		fitness *= (score - 9);
+	}
 }
 
 void Snake::search(){
